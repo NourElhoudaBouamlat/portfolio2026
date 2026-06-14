@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nour Elhouda — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:        #FAFAF8;
+  --surface:   #FFFFFF;
+  --border:    rgba(0,0,0,0.09);
+  --border-md: rgba(0,0,0,0.17);
+  --text:      #1A1A18;
+  --muted:     #6B6B66;
+  --hint:      #A8A8A3;
+  --sidebar-w: 220px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  --accent:      #7C3AED;
+  --accent-soft: #F3EBFF;
+  --accent-text: #5B21B6;
+
+  --acquis:      #16A34A;
+  --acquis-soft: #EAFBF0;
+  --diff:        #EA580C;
+  --diff-soft:   #FFF1E8;
+}
+
+html.dark {
+  --bg:        #121113;
+  --surface:   #1C1A1F;
+  --border:    rgba(255,255,255,0.09);
+  --border-md: rgba(255,255,255,0.17);
+  --text:      #EDEDE8;
+  --muted:     #A8A8A3;
+  --hint:      #6B6B66;
+
+  --accent:      #A78BFA;
+  --accent-soft: rgba(124,58,237,0.14);
+  --accent-text: #C4B5FD;
+
+  --acquis:      #4ADE80;
+  --acquis-soft: rgba(22,163,74,0.14);
+  --diff:        #FB923C;
+  --diff-soft:   rgba(234,88,12,0.14);
+}
+
+html { scroll-behavior: smooth; }
+* { transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; border-radius: var(--radius-md); }
+
+/* ── TOPBAR (mobile) ── */
+.topbar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--bg);
+  border-bottom: 0.5px solid var(--border);
+}
+.topbar-name { font-family: 'DM Serif Display', serif; font-size: 17px; }
+.topbar-name em { font-style: italic; color: var(--accent); }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 0.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+}
+
+.sidebar-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.sidebar-name em { font-style: italic; color: var(--accent); }
+
+.sidebar-role {
+  font-size: 11.5px;
+  color: var(--hint);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+/* Theme toggle - top of sidebar */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  border: 0.5px solid var(--accent);
+  border-radius: 99px;
+  padding: 7px 14px;
+  cursor: pointer;
+  width: fit-content;
+  margin-bottom: 1.75rem;
+}
+.theme-toggle:hover { opacity: 0.8; }
+.theme-toggle svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.theme-toggle .icon-moon { display: none; }
+html.dark .theme-toggle .icon-sun { display: none; }
+html.dark .theme-toggle .icon-moon { display: inline-flex; }
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: auto;
+}
+
+.sidebar-nav a {
+  font-size: 12.5px;
+  color: var(--muted);
+  padding: 5px 8px;
+  border-radius: var(--radius-md);
+}
+.sidebar-nav a:hover { background: var(--surface); color: var(--text); }
+.sidebar-nav .section-group { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--hint); padding: 12px 8px 4px; }
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 2rem;
+}
+
+.sidebar-links a {
+  font-size: 12px;
+  color: var(--hint);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.sidebar-links a:hover { color: var(--text); }
+.sidebar-links svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+/* ── MAIN ── */
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 0 4rem 4rem;
+  max-width: 900px;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 4rem 0 3rem;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  padding: 5px 12px;
+  border-radius: 99px;
+  margin-bottom: 1.25rem;
+}
+
+.hero-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(38px, 5vw, 56px);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+.hero-name em { font-style: italic; color: var(--accent); }
+
+.hero-desc {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 540px;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 11.5px;
+  padding: 4px 13px;
+  border: 0.5px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  border-radius: 99px;
+  font-weight: 500;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 3rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+section:last-of-type { border-bottom: none; }
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  font-weight: 700;
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.label::before {
+  content: '';
+  display: block;
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.prose {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 640px;
+  font-weight: 300;
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem 2rem;
+}
+.skill-group-title { font-size: 12px; font-weight: 700; margin-bottom: 0.5rem; color: var(--accent-text); }
+.skill-item { font-size: 13px; color: var(--muted); display: block; }
+
+/* ── CARDS GRID ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.5rem;
+  border-top: 3px solid var(--accent);
+}
+
+.card-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem;
+}
+.card-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.card-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+.card-text { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+/* ── PROJECTS ── */
+.projects-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.project-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: block;
+}
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 640px) {
+  .proj-grid { grid-template-columns: 1fr; }
+}
+
+.proj-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  border: 0.5px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.proj-img img { width: 100%; height: 100%; object-fit: cover; }
+.proj-img-placeholder {
+  text-align: center;
+  color: var(--hint);
+  font-size: 11px;
+  padding: 0.5rem;
+}
+.proj-img-placeholder svg { width: 28px; height: 28px; stroke: var(--hint); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; margin: 0 auto 6px; }
+
+.proj-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 6px; }
+.proj-title { font-weight: 700; font-size: 15px; }
+.proj-badge { font-size: 11px; padding: 3px 10px; border-radius: 99px; background: var(--accent-soft); color: var(--accent-text); font-weight: 500; white-space: nowrap; flex-shrink: 0; }
+.proj-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; font-weight: 300; }
+.proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+.proj-tech { font-size: 11px; padding: 2px 8px; background: var(--bg); color: var(--hint); border-radius: 4px; border: 0.5px solid var(--border); }
+
+.proj-meta { display: flex; flex-direction: column; gap: 10px; }
+.proj-meta-item {
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--muted);
+}
+.proj-meta-item strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.proj-meta-item svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.meta-acquis { background: var(--acquis-soft); }
+.meta-acquis strong { color: var(--acquis); }
+.meta-diff { background: var(--diff-soft); }
+.meta-diff strong { color: var(--diff); }
+
+/* ── EXPERIENCE ── */
+.exp-list { display: flex; flex-direction: column; gap: 2rem; }
+.exp-item { display: grid; grid-template-columns: 100px 1fr; gap: 1rem; }
+.exp-date { font-size: 12px; color: var(--accent-text); font-weight: 700; padding-top: 2px; }
+.exp-role { font-weight: 700; font-size: 14.5px; margin-bottom: 2px; }
+.exp-company { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.exp-desc { font-size: 13px; color: var(--muted); font-weight: 300; }
+
+/* ── HIGHLIGHT BLOCK ── */
+.highlight {
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.25rem;
+  margin-top: 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--accent-soft);
+}
+.highlight-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-text); font-weight: 700; margin-bottom: 6px; }
+.highlight-text { font-size: 14px; color: var(--text); font-weight: 300; line-height: 1.75; }
+
+/* ── VALUES ── */
+.values-list { display: flex; flex-direction: column; gap: 10px; }
+.value-row { display: flex; align-items: flex-start; gap: 12px; }
+.value-dot { width: 8px; height: 8px; border-radius: 2px; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+.value-text { font-size: 14px; color: var(--muted); font-weight: 300; }
+.value-text strong { font-weight: 700; color: var(--text); }
+
+/* ── RSE ── */
+.rse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.rse-item { padding: 1rem 1.25rem; border: 0.5px solid var(--border); border-radius: var(--radius-md); border-top: 3px solid var(--accent); }
+.rse-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.rse-text { font-size: 12.5px; color: var(--muted); font-weight: 300; }
+
+/* ── COMPETENCES BUT TABLE ── */
+.comp-table { display: flex; flex-direction: column; gap: 1rem; }
+.comp-row {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+}
+.comp-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+.comp-name { font-weight: 700; font-size: 14px; }
+.comp-level { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: var(--accent-soft); color: var(--accent-text); }
+.comp-text { font-size: 13px; color: var(--muted); font-weight: 300; }
+
+/* ── FIERTÉ / COMPETENCES TRANSVERSES ── */
+.fiertes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.fierte-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid var(--accent);
+}
+.fierte-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px;
+  color: var(--accent-soft);
+  position: absolute;
+  top: -8px; right: 12px;
+  line-height: 1;
+  user-select: none;
+}
+.fierte-title { font-weight: 700; font-size: 14.5px; margin-bottom: 8px; }
+.fierte-text { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+/* ── GALLERY (passeport culturel / images perso) ── */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; }
+.gallery-item {
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--hint);
+  font-size: 11px;
+  text-align: center;
+  padding: 0.5rem;
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-item svg { width: 24px; height: 24px; stroke: var(--hint); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── TIMELINE (objectifs) ── */
+.timeline { display: flex; flex-direction: column; gap: 1rem; }
+.timeline-item { display: flex; gap: 1rem; align-items: flex-start; }
+.timeline-badge {
+  font-size: 11px; font-weight: 700;
+  padding: 4px 12px; border-radius: 99px;
+  background: var(--accent-soft); color: var(--accent-text);
+  white-space: nowrap; flex-shrink: 0;
+}
+.timeline-text { font-size: 13.5px; color: var(--muted); font-weight: 300; padding-top: 2px; }
+
+/* ── CONTACT ── */
+.contact-line { font-size: 16px; color: var(--muted); }
+.contact-line a { color: var(--accent-text); border-bottom: 0.5px solid var(--accent); font-weight: 500; }
+
+footer { padding: 2rem 0; font-size: 12px; color: var(--hint); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .topbar { display: flex; }
+  .sidebar { display: none; }
+  .main { padding: 0 1.25rem 3rem; }
+  .exp-item { grid-template-columns: 1fr; gap: 2px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOPBAR (mobile only) ══ -->
+<header class="topbar">
+  <p class="topbar-name">Nour-Elhouda <em>Bouamlat</em></p>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer de thème" style="margin:0;">
+    <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</header>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar">
+  <!-- Theme toggle - tout en haut -->
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer de thème">
+    <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <span class="icon-sun">Mode sombre</span>
+    <span class="icon-moon">Mode clair</span>
+  </button>
+
+  <div>
+    <!-- ✏️ Votre prénom et nom -->
+    <p class="sidebar-name">Nour Elhouda<br><em>BOUAMLAT</em></p>
+    <p class="sidebar-role">BUT Sciences des données<br>Sorbonne Paris Nord</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <span class="section-group">Parcours</span>
+    <a href="#about">À propos</a>
+    <a href="#competences">Compétences BUT</a>
+    <a href="#skills">Compétences techniques</a>
+    <a href="#projets">Projets</a>
+    <a href="#experience">Stage / Alternance</a>
+
+    <span class="section-group">Monde pro</span>
+    <a href="#integration">Intégration & soft skills</a>
+    <a href="#projet-entreprise">Projet marquant</a>
+    <a href="#decouverte">Découverte de moi-même</a>
+    <a href="#valeurs">Valeurs & RSE</a>
+
+    <span class="section-group">Bilan</span>
+    <a href="#fiertes">Ce dont je suis fière</a>
+    <a href="#passeport">Passeport culturel</a>
+    <a href="#objectifs">Objectifs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="sidebar-links">
+    <!-- ✏️ Vos vrais liens -->
+    <a href="https://github.com/NourElhoudaBouamlat" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/nour-el-houda-bouamlat-6b834027b" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="CVNUR.pdf" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Mon CV
+    </a>
+    <a href="mailto:bouamlat.nourelhouda1@gmail.com">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email
+    </a>
+  </div>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero-eyebrow">Portfolio</span>
+    <h1 class="hero-name">
+      <!-- ✏️ Votre prénom et nom -->
+      Nour Elhouda<br><em>BOUAMLAT</em>
+    </h1>
+    <p class="hero-desc">
+      Future étudiante en cycle ingénieur à l'Efrei majeure data et machine learning.
+      À la recherche d'une alternance en Data Science à partir de septembre 2026.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Python</span>
+      <span class="tag">SQL / NoSQL</span>
+      <span class="tag">Machine Learning</span>
+      <span class="tag">Data Visualisation</span>
+      <span class="tag">Migration de données</span>
+      <span class="tag">Méthodes Agile</span>
+    </div>
+  </header>
+
+  <!-- À PROPOS -->
+  <section id="about">
+    <p class="label">À propos</p>
+    <!-- ✏️ 3-4 phrases vivantes et personnelles sur votre parcours -->
+    <p class="prose">
+      Intéressée par l'analyse de données et le machine learning, je souhaite développer des
+      modèles prédictifs et transformer les données en informations exploitables pour l'aide
+      à la décision. Mes années au BUT Sciences des données m'ont permis de travailler sur des
+      projets couvrant l'ensemble du cycle de la donnée : nettoyage, modélisation, migration et
+      visualisation. Aujourd'hui admise en cycle ingénieur à l'EFREI (majeure Big Data et
+      Machine Learning), je souhaite évoluer vers un métier de Data Scientist et je recherche
+      une alternance en Data Science à partir de septembre 2026, à raison de 3 jours en
+      entreprise et 2 jours à l'école.
+    </p>
+  </section>
+
+  <!-- AUTO-ÉVALUATION DES 4 COMPÉTENCES DU BUT -->
+  <section id="competences">
+    <p class="label">Auto-évaluation — les 4 compétences du BUT SD</p>
+    <p class="prose" style="margin-bottom:1.5rem;">
+      Tableau récapitulatif de mon niveau d'acquisition (niveau 3) pour chacune des 4 compétences,
+      avec des exemples concrets issus de mes SAÉ et projets.
+    </p>
+    <div class="comp-table">
+
+      <div class="comp-row">
+        <div class="comp-head">
+          <span class="comp-name">Compétence 1 — Traiter des données à des fins décisionnelles</span>
+          <span class="comp-level">Niveau 3 ✓</span>
+        </div>
+        <p class="comp-text">Mise en œuvre chez La Poste : extraction et préparation de données pour la direction commerciale, création de tableaux de KPI pour le suivi de l'activité et l'aide à la décision. Le projet de pilotage des performances des bureaux de poste en est l'exemple le plus complet — de la conception à la présentation finale aux directeurs de territoire. La principale difficulté a été de m'assurer que les indicateurs produits étaient à la fois fiables et directement interprétables par des interlocuteurs non-techniques.</p>
+      </div>
+
+      <div class="comp-row">
+        <div class="comp-head">
+          <span class="comp-name">Compétence 2 — Analyser statistiquement les données</span>
+          <span class="comp-level">Niveau 3 ✓</span>
+        </div>
+        <p class="comp-text">Acquise principalement lors du projet de Data Mining : préparation des données (nettoyage, encodage, ACP), développement et comparaison de modèles de machine learning (Logistic Regression, Decision Tree, KNN) et segmentation par clustering K-Means. J'ai appris à interpréter les résultats avec recul, à choisir les bonnes métriques d'évaluation et à présenter des conclusions statistiquement argumentées.</p>
+      </div>
+
+      <div class="comp-row">
+        <div class="comp-head">
+          <span class="comp-name">Compétence 3 — Valoriser la production dans un contexte professionnel</span>
+          <span class="comp-level">Niveau 3 ✓</span>
+        </div>
+        <p class="comp-text">Compétence centrale de mon alternance chez La Poste : j'ai présenté l'outil de pilotage des performances au Directeur Exploitation Commercial (DEX) et aux directeurs de territoire, puis organisé une présentation Teams à l'ensemble des collaborateurs utilisateurs. J'ai répondu à leurs questions, accompagné leurs premières saisies et recueilli leurs retours — une expérience complète de valorisation d'une production de bout en bout.</p>
+      </div>
+
+      <div class="comp-row">
+        <div class="comp-head">
+          <span class="comp-name">Compétence 4 — Modéliser les données dans un cadre statistique</span>
+          <span class="comp-level">Niveau 3 ✓</span>
+        </div>
+        <p class="comp-text">Développée lors du projet de migration SQL → NoSQL : conception de schémas via normalisation et dénormalisation, modélisation orientée objet des données, puis développement d'un système automatisé de migration entre bases relationnelles et NoSQL avec SQLAlchemy. J'ai également mobilisé cette compétence dans le projet Data Mining à travers la modélisation statistique (ACP, clustering, classification).</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES TECHNIQUES -->
+  <section id="skills">
+    <p class="label">Compétences techniques</p>
+    <div class="skills-grid">
+      <div>
+        <p class="skill-group-title">Data & Machine Learning</p>
+        <span class="skill-item">Python (Pandas, NumPy, Scikit-learn)</span>
+        <span class="skill-item">R</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Bases de données</p>
+        <span class="skill-item">SQL</span>
+        <span class="skill-item">PostgreSQL</span>
+        <span class="skill-item">MySQL</span>
+        <span class="skill-item">MongoDB</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Data Visualisation</p>
+        <span class="skill-item">Excel</span>
+        <span class="skill-item">Power BI</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Programmation</p>
+        <span class="skill-item">Java</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">PHP</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Outils & systèmes</p>
+        <span class="skill-item">GitHub</span>
+        <span class="skill-item">Jupyter Notebook</span>
+        <span class="skill-item">Docker</span>
+        <span class="skill-item">Windows · Linux</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Gestion de projet</p>
+        <span class="skill-item">Méthodes Agile</span>
+        <span class="skill-item">Gantt · PERT</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Langues</p>
+        <span class="skill-item">Anglais — B2 (TOEIC)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets">
+    <p class="label">Projets — SAÉ & réalisations</p>
+    <div class="projects-list">
+
+      <!-- PROJET 1 — Processus de Data Mining -->
+      <div class="project-card">
+        <div class="proj-grid">
+          <div class="proj-img">
+            <!-- ✏️ Remplacez par <img src="vos-images/data-mining.png" alt="..."> -->
+            <div class="proj-img-placeholder">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              Capture / image du projet
+            </div>
+          </div>
+          <div>
+            <div class="proj-top">
+              <span class="proj-title">Mise en œuvre d'un processus de Data Mining</span>
+              <span class="proj-badge">Machine Learning</span>
+            </div>
+            <p class="proj-desc">
+              Préparation et transformation des données (nettoyage, encodage, ACP), puis
+              développement et évaluation de plusieurs modèles de machine learning
+              (régression logistique, arbre de décision, KNN). Segmentation par clustering
+              (K-Means) et analyse/interprétation des performances obtenues.
+            </p>
+            <div class="proj-stack">
+              <span class="proj-tech">Python</span><span class="proj-tech">Scikit-learn</span><span class="proj-tech">ACP</span><span class="proj-tech">K-Means</span>
+            </div>
+            <div class="proj-meta">
+              <div class="proj-meta-item meta-acquis">
+                <strong><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Acquis & compétences</strong>
+                Préparation de données, visualisation de données, modélisation en machine learning (Logistic Regression, Decision Tree, KNN) et évaluation de modèles.
+              </div>
+              <div class="proj-meta-item meta-diff">
+                <strong><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Difficultés rencontrées</strong>
+                <!-- ✏️ Décrivez une vraie difficulté : ex. choix du nombre de clusters, données déséquilibrées, encodage de variables catégorielles -->
+                [Décrivez une difficulté rencontrée sur ce projet : par exemple le choix du bon nombre de composantes pour l'ACP, ou la comparaison des modèles pour choisir le plus performant, et comment vous avez procédé.]
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJET 2 — Automatisation migration SQL-NoSQL -->
+      <div class="project-card">
+        <div class="proj-grid">
+          <div class="proj-img">
+            <!-- ✏️ Remplacez par <img src="vos-images/migration.png" alt="..."> -->
+            <div class="proj-img-placeholder">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              Capture / image du projet
+            </div>
+          </div>
+          <div>
+            <div class="proj-top">
+              <span class="proj-title">Automatisation d'une migration SQL — NoSQL</span>
+              <span class="proj-badge">Bases de données</span>
+            </div>
+            <p class="proj-desc">
+              Conception et structuration de données via normalisation et dénormalisation,
+              modélisation orientée objet des données, et développement d'un système
+              automatisé de migration entre bases relationnelles et bases NoSQL.
+            </p>
+            <div class="proj-stack">
+              <span class="proj-tech">SQL</span><span class="proj-tech">Python</span><span class="proj-tech">SQLAlchemy</span><span class="proj-tech">MongoDB</span>
+            </div>
+            <div class="proj-meta">
+              <div class="proj-meta-item meta-acquis">
+                <strong><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Acquis & compétences</strong>
+                Modélisation de données, abstraction orientée objet, migration de données, Python, SQLAlchemy.
+              </div>
+              <div class="proj-meta-item meta-diff">
+                <strong><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Difficultés rencontrées</strong>
+                <!-- ✏️ Décrivez une vraie difficulté : ex. correspondance entre schéma relationnel et structure documentaire -->
+                [Décrivez une difficulté : par exemple, faire correspondre un schéma relationnel normalisé à une structure orientée document NoSQL sans perdre l'intégrité des données, et comment vous l'avez résolue avec SQLAlchemy.]
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJET 3 — Application de gestion clients (stage cabinet d'assurance) -->
+      <div class="project-card">
+        <div class="proj-grid">
+          <div class="proj-img">
+            <!-- ✏️ Remplacez par <img src="vos-images/app-gestion-clients.png" alt="..."> -->
+            <div class="proj-img-placeholder">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              Capture / image du projet
+            </div>
+          </div>
+          <div>
+            <div class="proj-top">
+              <span class="proj-title">Application de gestion clients — Cabinet d'assurance</span>
+              <span class="proj-badge">Stage · Développement</span>
+            </div>
+            <p class="proj-desc">
+              Développement d'une application de gestion clients avec PyQt5 et PostgreSQL,
+              incluant l'implémentation de fonctionnalités CRUD complètes et la mise en place
+              de statistiques automatisées pour le suivi de l'activité.
+            </p>
+            <div class="proj-stack">
+              <span class="proj-tech">Python</span><span class="proj-tech">PyQt5</span><span class="proj-tech">PostgreSQL</span><span class="proj-tech">CRUD</span>
+            </div>
+            <div class="proj-meta">
+              <div class="proj-meta-item meta-acquis">
+                <strong><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Acquis & compétences</strong>
+                PyQt5, PostgreSQL, conception d'interface, logique métier.
+              </div>
+              <div class="proj-meta-item meta-diff">
+                <strong><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Difficultés rencontrées</strong>
+                <!-- ✏️ Décrivez une vraie difficulté : ex. lien interface/base de données, gestion des erreurs -->
+                [Décrivez une difficulté rencontrée : par exemple synchroniser l'interface PyQt5 avec la base PostgreSQL en temps réel, ou gérer les cas d'erreurs de saisie, et comment vous l'avez résolue.]
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ Ajoutez d'autres projets en copiant un bloc .project-card -->
+
+      <!-- PROJET 5 — Outil de pilotage DEX (La Poste) -->
+      <div class="project-card">
+        <div class="proj-grid">
+          <div class="proj-img">
+            <!-- ✏️ Remplacez par <img src="vos-images/outil-pilotage.png" alt="..."> -->
+            <div class="proj-img-placeholder">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              Capture de l'outil de pilotage
+            </div>
+          </div>
+          <div>
+            <div class="proj-top">
+              <span class="proj-title">Outil de pilotage du fonds de commerce</span>
+              <span class="proj-badge">Alternance · Pilotage commercial</span>
+            </div>
+            <p class="proj-desc">
+              Conception, pour la Directrice Exécutive (DEX), d'un outil de pilotage des
+              performances des bureaux de poste sur les quatre grands segments d'activité.
+              Responsable du projet de bout en bout : brainstorming, création des tableaux
+              et fichiers, mise en place de l'outil, présentation à la DEX et aux
+              directeurs de territoires, puis formation des collaborateurs par Teams.
+            </p>
+            <div class="proj-stack">
+              <span class="proj-tech">Excel avancé</span><span class="proj-tech">Pilotage de la performance</span><span class="proj-tech">Gestion de projet</span><span class="proj-tech">Présentation</span>
+            </div>
+            <div class="proj-meta">
+              <div class="proj-meta-item meta-acquis">
+                <strong><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Acquis & compétences</strong>
+                Gestion de projet de bout en bout, conception d'outils de pilotage Excel avancés, présentation à des décideurs (DEX, directeurs de territoires) et accompagnement au changement auprès des utilisateurs finaux.
+              </div>
+              <div class="proj-meta-item meta-diff">
+                <strong><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Difficultés rencontrées</strong>
+                <!-- ✏️ Décrivez une vraie difficulté : ex. recueil des besoins auprès de différents interlocuteurs, prise en main de l'outil par les collaborateurs -->
+                [Décrivez une difficulté : par exemple concilier les besoins parfois différents de la DEX et des directeurs de territoires, ou accompagner des collaborateurs peu à l'aise avec Excel lors de leurs premières saisies, et comment vous avez géré cela.]
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STAGE / ALTERNANCE -->
+  <section id="experience">
+    <p class="label">Stage / alternance — bilan</p>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <span class="exp-date">Nov. 2025 – Sept. 2026</span>
+        <div>
+          <p class="exp-role">Alternante Data Analyst</p>
+          <p class="exp-company">La Poste</p>
+          <p class="exp-desc">Extraction et préparation de données pour la direction commerciale. Création de tableaux d'analyse et de KPI sous Excel pour le suivi de l'activité commerciale et l'aide à la décision.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-date">Mai – Juil. 2025</span>
+        <div>
+          <p class="exp-role">Stagiaire Développeuse Python</p>
+          <p class="exp-company">Cabinet d'assurance</p>
+          <p class="exp-desc">Développement d'une application de gestion clients (PyQt5, PostgreSQL), implémentation de fonctionnalités CRUD et de statistiques automatisées.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-date">2022 – 2025</span>
+        <div>
+          <p class="exp-role">BUT Informatique (obtenu) + BUT Sciences des données (alternance)</p>
+          <p class="exp-company">IUT de Villetaneuse — Université Sorbonne Paris Nord</p>
+          <p class="exp-desc">Statistiques appliquées, programmation Python & R, bases de données relationnelles et NoSQL, visualisation de données, machine learning et gestion de projet.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-date">2026 – 2029</span>
+        <div>
+          <p class="exp-role">Cycle ingénieur — Big Data et Machine Learning</p>
+          <p class="exp-company">EFREI Paris</p>
+          <p class="exp-desc">Admise au cycle ingénieur, majeure Big Data et Machine Learning. Recherche d'une alternance en Data Science à partir de septembre 2026 (3 jours entreprise / 2 jours école).</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="highlight">
+      <p class="highlight-label">Bilan de l'alternance (en cours)</p>
+      <!-- ✏️ Cette alternance est en cours (Nov 2025 - Sept 2026) : adaptez au temps présent si besoin -->
+      <p class="highlight-text">
+        Cette alternance chez La Poste me permet de découvrir le métier de Data Analyst au
+        sein d'une direction commerciale : extraction et préparation de données, construction
+        de tableaux de suivi et de KPI sous Excel pour aider à la décision. [Complétez avec
+        ce que cette expérience vous apporte concrètement : gain en autonomie, maîtrise
+        d'Excel avancé, compréhension des enjeux commerciaux, posture professionnelle, etc.]
+      </p>
+    </div>
+  </section>
+
+  <!-- INTÉGRATION -->
+  <section id="integration">
+    <p class="label">Découverte du monde professionnel — mon intégration</p>
+
+    <p class="prose" style="margin-bottom:1.5rem;">
+      Mon intégration s'est faite à travers une soirée dédiée aux alternants (escape game,
+      repas) qui m'a permis de créer des liens, puis une journée d'immersion en bureau de
+      poste organisée par ma tutrice : découverte du fonctionnement opérationnel, des
+      tableaux de suivi commercial saisis par les conseillers, et observation d'une réunion
+      de pilotage entre un directeur de territoire et une chargée d'affaires patrimoine.
+      Cette immersion m'a permis de relier les données que j'exploite à leur réalité
+      terrain.
+    </p>
+
+    <div class="cards-grid">
+      <div class="card" style="border-top-width:1px;">
+        <p class="card-title">🎉 Soirée d'intégration</p>
+        <p class="card-text">Escape game et repas avec les autres alternants — premiers liens créés.</p>
+      </div>
+      <div class="card" style="border-top-width:1px;">
+        <p class="card-title">🏤 Immersion bureau de poste</p>
+        <p class="card-text">Découverte du terrain, des tableaux de suivi commercial et des produits vendus (livrets, cartes bancaires...).</p>
+      </div>
+      <div class="card" style="border-top-width:1px;">
+        <p class="card-title">📊 Réunion de pilotage</p>
+        <p class="card-text">Observation d'une réunion directeur de territoire / chargée d'affaires : analyse des résultats commerciaux.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJET EN ENTREPRISE -->
+  <section id="projet-entreprise">
+    <p class="label">Un projet en entreprise qui m'a plu</p>
+
+    <p class="prose">
+      J'ai été responsable d'un projet d'envergure pour la Directrice Exécutive (DEX) :
+      la création d'un <strong>outil de pilotage des performances des bureaux de poste
+      sur les quatre grands segments d'activité</strong> (pilotage du fonds de commerce).
+      J'y ai participé de bout en bout, du brainstorming initial à la mise en place de
+      l'outil, puis à sa présentation à la DEX et aux directeurs de territoires, et enfin
+      à sa formation auprès des collaborateurs par Teams.
+    </p>
+
+    <div class="highlight">
+      <p class="highlight-label">Ce que j'ai appris</p>
+      <p class="highlight-text">
+        Gérer un projet de bout en bout (recueil des besoins → conception → présentation
+        → formation), prendre la parole devant des décideurs, et accompagner le changement
+        auprès des futurs utilisateurs.
+      </p>
+    </div>
+  </section>
+
+  <!-- DÉCOUVERTE DE SOI -->
+  <section id="decouverte">
+    <p class="label">Qu'ai-je découvert de moi-même grâce au stage / à l'alternance ?</p>
+    <!-- ✏️ Réflexion personnelle et sincère sur l'alternance La Poste -->
+    <p class="prose">
+      Cette alternance chez La Poste m'a permis de mieux me connaître professionnellement.
+      J'ai découvert que j'apprécie particulièrement le lien entre la technique et le
+      métier : transformer des données brutes en indicateurs compréhensibles pour des
+      équipes non-techniques me motive autant que la modélisation pure. [Ajoutez une
+      anecdote précise : un moment où vous avez réalisé cela.] Cela m'a aidée à confirmer
+      mon souhait d'évoluer vers un métier de Data Scientist, à l'interface entre
+      l'analyse technique et l'aide à la décision.
+    </p>
+  </section>
+
+  <!-- VALEURS & RSE -->
+  <section id="valeurs">
+    <p class="label">Concordance entre mes valeurs et celles de l'entreprise</p>
+
+    <p class="prose" style="margin-bottom:1.5rem;">
+      <!-- ✏️ Expliquez pourquoi La Poste vous correspondait -->
+      Avant cette alternance, j'ai cherché une structure dont les valeurs résonnaient avec
+      les miennes. La Poste m'a attirée pour son rôle de service public, sa présence sur
+      tout le territoire et son engagement affiché en matière de transition écologique et
+      de proximité. Voici les points de convergence que j'ai identifiés :
+    </p>
+
+    <div class="values-list" style="margin-bottom:2rem;">
+      <div class="value-row">
+        <div class="value-dot"></div>
+        <p class="value-text"><strong>Rigueur & fiabilité</strong> — Le Groupe La Poste valorise la fiabilité de ses données et de ses services, ce qui correspond à ma façon de travailler : vérifier, fiabiliser et documenter avant de transmettre un indicateur.</p>
+      </div>
+      <div class="value-row">
+        <div class="value-dot"></div>
+        <p class="value-text"><strong>Service & utilité concrète</strong> — La culture d'entreprise est tournée vers l'utilité pour les clients et les territoires, une valeur que je retrouve dans ma volonté de produire des analyses réellement utiles à la décision.</p>
+      </div>
+      <div class="value-row">
+        <div class="value-dot"></div>
+        <p class="value-text"><strong>[Votre 3ᵉ valeur partagée]</strong> — [Par exemple : transition écologique, diversité, esprit d'équipe — expliquez pourquoi cette valeur vous correspond personnellement.]</p>
+      </div>
+    </div>
+
+    <p class="label" style="margin-top:2rem;">RSE — Responsabilité sociétale</p>
+    <p class="prose" style="margin-bottom:1.5rem;">
+      <!-- ✏️ Engagements RSE observés chez La Poste -->
+      Le Groupe La Poste s'engage sur plusieurs axes RSE que j'ai pu observer ou découvrir
+      au quotidien lors de mon alternance :
+    </p>
+
+    <div class="rse-grid">
+      <div class="rse-item">
+        <p class="rse-title">Environnement</p>
+        <!-- ✏️ Ex : flotte de véhicules électriques, neutralité carbone, dématérialisation -->
+        <p class="rse-text">[Décrivez les pratiques environnementales observées : par exemple la dématérialisation des documents, les engagements de neutralité carbone, ou l'usage de véhicules électriques pour la livraison.]</p>
+      </div>
+      <div class="rse-item">
+        <p class="rse-title">Social & diversité</p>
+        <!-- ✏️ Ex : politique de formation, mission de service public, accessibilité -->
+        <p class="rse-text">[Décrivez les engagements sociaux observés : politique de formation des alternants, accessibilité des services postaux sur le territoire, diversité des équipes.]</p>
+      </div>
+      <div class="rse-item">
+        <p class="rse-title">Gouvernance & éthique</p>
+        <!-- ✏️ Ex : confidentialité des données clients, transparence des indicateurs -->
+        <p class="rse-text">[Décrivez les pratiques de gouvernance observées : confidentialité et protection des données clients, transparence dans la construction des indicateurs commerciaux.]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CE DONT JE SUIS LA PLUS FIÈRE -->
+  <section id="fiertes">
+    <p class="label">Ce dont je suis la plus fière — 3 compétences transverses</p>
+
+    <div class="fiertes-grid">
+
+      <div class="fierte-card">
+        <span class="fierte-num" aria-hidden="true">01</span>
+        <p class="fierte-title">Adaptabilité</p>
+        <p class="fierte-text">En arrivant chez La Poste, je maîtrisais Excel de façon moyenne. Mes missions m'ont demandé de travailler exclusivement avec Excel avancé (tableaux croisés dynamiques, formules complexes, mise en forme de tableaux de pilotage). J'ai dû monter en compétence rapidement sur cet outil pour répondre aux attentes de l'équipe, et je le maîtrise aujourd'hui à un niveau avancé.</p>
+      </div>
+
+      <div class="fierte-card">
+        <span class="fierte-num" aria-hidden="true">02</span>
+        <p class="fierte-title">Esprit critique & analyse</p>
+        <p class="fierte-text">Lors du projet de Data Mining, je ne me suis pas contentée d'appliquer des modèles : j'ai comparé Logistic Regression, Decision Tree et KNN, analysé leurs performances et interprété les résultats de la segmentation K-Means pour en tirer des conclusions argumentées plutôt qu'un simple résultat brut.</p>
+      </div>
+
+      <div class="fierte-card">
+        <span class="fierte-num" aria-hidden="true">03</span>
+        <p class="fierte-title">Travail en équipe</p>
+        <p class="fierte-text">Sur le projet de pilotage du fonds de commerce pour la DEX, j'ai dû échanger avec différents interlocuteurs (DEX, directeurs de territoires, collaborateurs terrain) et adapter ma communication selon mon audience — une expérience qui m'a appris à fédérer autour d'un outil commun et à accompagner sa prise en main par les équipes.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PASSEPORT CULTUREL -->
+  <section id="passeport">
+    <p class="label">Passeport culturel</p>
+    <p class="prose" style="margin-bottom:1.5rem;">
+      Au-delà des cours, j'ai vécu une expérience internationale marquante et je maintiens
+      une veille active sur les sujets data et IA.
+    </p>
+
+    <div class="cards-grid" style="margin-bottom:1.5rem;">
+      <div class="card" style="border-top-width:1px;">
+        <p class="card-title">🌍 Hackathon international — TAMK University (Finlande)</p>
+        <p class="card-text">Participation à un hackathon en équipe internationale autour de problématiques data et informatique, avec développement d'une solution en temps limité. 
+          Acquis : travail en équipe, résolution de problèmes, communication en anglais.</p>
+      </div>
+      <div class="card" style="border-top-width:1px;">
+        <p class="card-title">📰 Veille technologique</p>
+        <!-- ✏️ Adaptez avec vos vraies sources si différentes -->
+        <p class="card-text">Je suis régulièrement des newsletters comme Data Science Weekly et des comptes LinkedIn de Data Scientists, ainsi que le blog Towards Data Science, pour suivre les avancées en machine learning et en IA.</p>
+      </div>
+    </div>
+
+    <div class="gallery-grid">
+      <!-- ✏️ Remplacez par vos vraies photos : <img src="..." alt="..."> -->
+      <div class="gallery-item">
+        <img src="hackathon.jpeg">
+      </div>
+      <div class="gallery-item">
+        <img src="hackathon2.jpeg">
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIFS -->
+  <section id="objectifs">
+    <p class="label">Objectifs & poursuite d'études</p>
+
+    <p class="prose" style="margin-bottom:1.5rem;">
+      Je suis admise au cycle ingénieur de l'EFREI Paris (2026-2029), au sein de la majeure
+      Big Data et Machine Learning. Ce choix est dans la continuité directe de mon BUT
+      Sciences des données : il me permettra d'approfondir mes compétences en machine
+      learning et big data tout en poursuivant en alternance, pour construire un profil de
+      Data Scientist solide à la fois technique et opérationnel.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-badge">Court terme</span>
+        <p class="timeline-text">Trouver une alternance en Data Science à partir de septembre 2026 (rythme 3 jours entreprise / 2 jours école) pour démarrer mon cycle ingénieur à l'EFREI dans de bonnes conditions.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-badge">Moyen terme</span>
+        <p class="timeline-text">Valider mon cycle ingénieur Big Data et Machine Learning (2026-2029) en développant une expertise solide en modélisation prédictive et en traitement de données à grande échelle.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-badge">Long terme</span>
+        <p class="timeline-text">Évoluer vers un poste de Data Scientist, en mettant la donnée au service de l'aide à la décision dans des contextes métier concrets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="label">Contact</p>
+    <!-- ✏️ Mettez à jour la date et votre email -->
+    <p class="contact-line">
+      Disponible pour une alternance à partir de septembre 2026
+      <br>
+      <a href="mailto:bouamlat.nourelhouda1@gmail.com">bouamlat.nourelhouda1@gmail.com</a>
+      <br>
+      06 05 60 96 05
+    </p>
+  </section>
+
+  <footer>
+    <!-- ✏️ Votre prénom et nom -->
+    <p>© 2026 Nour Elhouda BOUAMLAT</p>
+  </footer>
+
+</main>
+
+<script>
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+  function toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  }
+</script>
+</body>
+</html>
